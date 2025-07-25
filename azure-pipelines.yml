@@ -18,8 +18,12 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      name: default
+      demands: agent.name -equals Pradeeps-Air 
     steps:
+    - script: echo "Running on self-hosted agent!"
+      displayName: "Test self-hosted agent"
+
     - task: Docker@2
       displayName: Build an image
       inputs:
