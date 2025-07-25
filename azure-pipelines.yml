@@ -23,11 +23,22 @@ stages:
     steps:
     - script: echo "Running on self-hosted agent!"
       displayName: "Test self-hosted agent"
+    
+    - task: JavaToolInstaller@1
+      inputs:
+        versionSpec: '17'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+    
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: 'mvn clean package -DskipTests'
 
     - task: Docker@2
       displayName: Build an image
       inputs:
         command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/springboot-hello-world/Dockerfile'
         tags: |
           $(tag)
