@@ -18,7 +18,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      name: default
+      name: mac_agent
       demands: agent.name -equals Pradeeps-Air 
     steps:
     - script: echo "Running on self-hosted agent!"
