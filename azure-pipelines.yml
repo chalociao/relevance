@@ -24,11 +24,19 @@ stages:
     - script: echo "Running on self-hosted agent!"
       displayName: "Test self-hosted agent"
     
-    - task: JavaToolInstaller@1
-      inputs:
-        versionSpec: '17'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'PreInstalled'
+    - script: |
+        echo "Java version:"
+        java -version
+      displayName: 'Check Java Version'
+      env:
+        JAVA_HOME: /opt/homebrew/opt/openjdk@17
+        PATH: /opt/homebrew/opt/openjdk@17/bin:$(PATH)
+
+    - script: java -version
+      displayName: 'Verify Java Version'
+
+    - script: mvn clean install  # or ./gradlew build
+      displayName: 'Build the project'
     
     - task: Bash@3
       inputs:
