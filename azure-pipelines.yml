@@ -34,9 +34,6 @@ stages:
 
     - script: java -version
       displayName: 'Verify Java Version'
-
-    - script: mvn clean install  # or ./gradlew build
-      displayName: 'Build the project'
     
     - task: Bash@3
       inputs:
